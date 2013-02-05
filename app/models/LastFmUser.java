@@ -8,7 +8,16 @@ public class LastFmUser implements Serializable{
     String name;
     String key;
     boolean subscriber;
+    Playlist playlist;
     
+    public Playlist getPlaylist() {
+        return playlist;
+    }
+
+    public void setPlaylist(Playlist playlist) {
+        this.playlist = playlist;
+    }
+
     public String getName() {
         return name;
     }

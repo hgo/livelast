@@ -1,4 +1,6 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+#{list items:user?.playlist?.tracks as 'track'}
+<a href="${track.location}">${track.title}</a>
+#{/list}
