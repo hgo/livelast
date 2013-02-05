@@ -1,0 +1,10 @@
+.project
+.classpath
+.settings
+eclipse
+tmp
+test-result
+lib
+modules
+nbproject
+*.log
