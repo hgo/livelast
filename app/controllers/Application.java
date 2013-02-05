@@ -16,6 +16,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import play.Logger;
+import play.Play;
 import play.cache.Cache;
 import play.libs.Codec;
 import play.libs.WS;
@@ -84,7 +85,12 @@ public class Application extends Controller {
     }
     
     public static void login() {
-        redirect("http://www.last.fm/api/auth/?api_key=ef1b8ec486144479aea70cc1bb73a7d5&cb=http://localhost:9000/application/lcallback");
+        redirect("http://www.last.fm/api/auth/?api_key=ef1b8ec486144479aea70cc1bb73a7d5&"+getCallBack("/application/lcallback"));
+    }
+    
+    @Util
+    private static String getCallBack(String resource){
+        return (Play.id == null || Play.id.isEmpty()) ? "http://localhost:9000"+resource : "http://livelast.herokuapp.com"+resource;
     }
 
     @Util
