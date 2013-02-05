@@ -85,7 +85,7 @@ public class Application extends Controller {
     }
     
     public static void login() {
-        redirect("http://www.last.fm/api/auth/?api_key=ef1b8ec486144479aea70cc1bb73a7d5&"+getCallBack("/application/lcallback"));
+        redirect("http://www.last.fm/api/auth/?api_key=ef1b8ec486144479aea70cc1bb73a7d5&cb="+getCallBack("/application/lcallback"));
     }
     
     @Util
