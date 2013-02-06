@@ -10,7 +10,7 @@ function next(){
         	});
 }
 $(document).ready(function(){
-	$('#audioPlayer').bind('end',function(){
+	$('#audioPlayer').bind('ended',function(){
 			next();
 	});
 	next();
@@ -19,3 +19,4 @@ $(document).ready(function(){
 
 #{/set}
 <audio id="audioPlayer" autoplay autobuffer controls />
+<input type="button" value="next" onclick="next()"/>
