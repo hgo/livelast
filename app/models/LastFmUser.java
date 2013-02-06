@@ -15,7 +15,11 @@ public class LastFmUser implements Serializable{
     }
 
     public void setPlaylist(Playlist playlist) {
-        this.playlist = playlist;
+        if(this.playlist == null){
+            this.playlist = playlist;
+        }else{
+            this.playlist.tracks.addAll(playlist.tracks);
+        }
     }
 
     public String getName() {
