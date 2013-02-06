@@ -8,6 +8,7 @@ public class Track implements Serializable{
     public String album;
     public String image;
     public long duration;
+    public String creator;
 }
 
 

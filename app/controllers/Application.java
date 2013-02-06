@@ -167,6 +167,7 @@ public class Application extends Controller {
             track.album = ((Element)tracks.item(i)).getElementsByTagName("album").item(0).getTextContent();
             track.image = ((Element)tracks.item(i)).getElementsByTagName("image").item(0).getTextContent();
             track.duration = Long.valueOf(((Element)tracks.item(i)).getElementsByTagName("duration").item(0).getTextContent());
+            track.creator = ((Element)tracks.item(i)).getElementsByTagName("creator").item(0).getTextContent();
             playlist.tracks.add(track);
         }
         
