@@ -1,6 +1,21 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
+#{set 'moreScripts'}
+<script>
+function next(){
+	$.getJSON("/application/nextTrack",
+    	    function(data){
+        			console.log(data);	
+        			$('#audioPlayer').attr('src',data.location);
+        	});
+}
+$(document).ready(function(){
+	$('#audioPlayer').bind('end',function(){
+			next();
+	});
+	next();
+});
+</script>
 
-#{list items:user?.playlist?.tracks ,as:'track'}
-<a href="${track.location}">${track.title}</a>
-#{/list}
+#{/set}
+<audio id="audioPlayer" autoplay autobuffer controls />

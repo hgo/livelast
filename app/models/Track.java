@@ -1,6 +1,8 @@
 package models;
 
-public class Track {
+import java.io.Serializable;
+
+public class Track implements Serializable{
     public String location;
     public String title;
     public String album;

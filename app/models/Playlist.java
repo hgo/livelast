@@ -1,11 +1,22 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Playlist {
+public class Playlist implements Serializable{
     public String title;
     public String creator;
     public ArrayList<Track> tracks = new ArrayList<Track>();
+    private int idx = -1;
+    
+    public Track next() throws IndexOutOfBoundsException{
+        if(tracks.size() < idx + 1){
+            throw new IndexOutOfBoundsException();
+        }else{
+            idx ++; 
+            return tracks.get(idx);
+        }
+    }
 }
 /*
  * <playlist version="1" xmlns="http://xspf.org/ns/0/">

@@ -174,4 +174,27 @@ public class Application extends Controller {
         return playlist;
     }
 
+    public static void nextTrack(){
+        
+        /*
+         * #{list items:user?.playlist?.tracks ,as:'track'}
+<a href="${track.location}">${track.title}</a>
+#{/list}
+         */
+        if( ! request.isAjax()){
+            notFound();
+        }
+        LastFmUser user = getUser();
+        Track track = null;
+        try{
+            if(user.getPlaylist() == null){
+                user.setPlaylist(getPlayList(user.getKey()));
+            }
+            track = user.getPlaylist().next();
+        }catch(IndexOutOfBoundsException e){
+            user.setPlaylist(getPlayList(user.getKey()));
+            track = user.getPlaylist().next();
+        }
+        renderJSON(track);
+    }
 }
