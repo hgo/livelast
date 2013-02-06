@@ -18,6 +18,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import controllers.util.LastFmParameterBuilder;
+
 import play.Logger;
 import play.Play;
 import play.cache.Cache;
@@ -31,8 +33,7 @@ import play.mvc.Util;
 
 public class Application extends Controller {
 
-    final static String api_key = "ef1b8ec486144479aea70cc1bb73a7d5";
-    final static String api_secret = "96c36d6fb5bd26c2b7ed4a3e2b4b04bf";
+
     static String _token;
     
     @Before(unless={"login","lcallback"})
@@ -46,31 +47,18 @@ public class Application extends Controller {
         request.args.put("user",Cache.get(session.getId()));
     }
     
-    @Util 
-    private static String api_sig(TreeMap<String, String> orderedMap){
-        StringBuilder builder = new StringBuilder();
-        for (Map.Entry<String, String> entry: orderedMap.entrySet()) {
-            Logger.info("enty - val -> %s", entry.toString());
-            builder.append(entry.getKey()).append(entry.getValue());
-        }
-        String format = builder.append(api_secret).toString();
-        Logger.info("before hash = %s", format);
-        String api_sig = Codec.hexMD5(format);
-        Logger.info("api_sig = "+api_sig);
-        return api_sig;
-    }
-    
     public static void lcallback() throws NoSuchAlgorithmException, IOException {
         final String token = params.get("token");
         _token = token; 
         final String method = "auth.getSession";
+        
         TreeMap<String, String> map = new TreeMap<String , String>(){{
-          put("api_key", api_key);
+          put("api_key", LastFmParameterBuilder.api_key);
           put("method", method);
           put("token", token);
         }};
         WSRequest wsRequest = WS.withEncoding("UTF-8").url(
-                String.format("http://ws.audioscrobbler.com/2.0/?method=%s&api_key=%s&api_sig=%s&token=%s", method,api_key, api_sig(map), token,api_secret));
+        String.format("http://ws.audioscrobbler.com/2.0/?method=%s&api_key=%s&api_sig=%s&token=%s", method,LastFmParameterBuilder.api_key, LastFmParameterBuilder.api_sig(map), token,LastFmParameterBuilder.api_secret));
         Logger.info("url: "+wsRequest.url);
         HttpResponse httpResponse = wsRequest.get();
         Logger.info(httpResponse.getString());
@@ -105,23 +93,12 @@ public class Application extends Controller {
         final LastFmUser user = getUser();
         final String station = "lastfm://user/" + user.getName() + "/library";
         final String method = "radio.tune";
-        final String rtp = "1";
         String url = "http://ws.audioscrobbler.com/2.0/";
-        TreeMap<String, String> map = new TreeMap<String, String>(){{
-           put("station", station);
-           put("method",method);
-           put("sk",user.getKey());
-           put("api_key",api_key);
-//           put("rpt",rtp);
-        }};
+        Map<String, Object> params = LastFmParameterBuilder.newInstance()
+                              .add("station",station)
+                              .add("method", method)
+                              .add("sk", user.getKey()).build(true);
         
-        Map<String, Object> params = new HashMap();
-        params.put("api_sig", api_sig(map));
-        params.put("station", station);
-        params.put("method", method);
-        params.put("sk", user.getKey());
-        params.put("api_key", api_key);
-//        params.put("rtp", rtp);
         WSRequest wsRequest = WS.withEncoding("utf-8").url(url);
         wsRequest.parameters = params;
         HttpResponse httpResponse = wsRequest.post();
@@ -137,18 +114,11 @@ public class Application extends Controller {
     @Util
     private static Playlist getPlayList(final String sk){
         String url = "http://ws.audioscrobbler.com/2.0/";
-        TreeMap<String, String> map = new TreeMap<String, String>(){{
-            put("method","radio.getPlaylist");
-            put("sk",sk);
-            put("api_key",api_key);
-         }};
-        Map<String, Object> params = new HashMap();
-        params.put("method", "radio.getPlaylist");
-        params.put("sk", sk);
-        params.put("api_key", api_key);
-        params.put("api_sig", api_sig(map));
+        String method = "radio.getPlaylist";
+        Map<String, Object> parameters = LastFmParameterBuilder.newInstance().add("method", method)
+                                            .add("sk", sk).build(true);
         WSRequest wsRequest = WS.withEncoding("utf-8").url(url);
-        wsRequest.parameters = params;
+        wsRequest.parameters = parameters;
         HttpResponse httpResponse = wsRequest.post();
         Logger.info("radio.getPlayList:" + httpResponse.getString());
         //
@@ -209,29 +179,16 @@ public class Application extends Controller {
         final String album = track.album;
         final String sk = user.getKey();
         final String _track = track.title;
-        TreeMap<String, String> map = new TreeMap<String, String>(){{
-            put("method",method);
-            put("sk",sk);
-            put("artist",artist);
-            put("album",album);
-            put("api_key",api_key);
-            put("track", _track);
-         }};
-         
+        Map<String, Object> parameters = LastFmParameterBuilder.newInstance()
+                .add("method", method)
+                .add("sk", sk)
+                .add("artist", artist)
+                .add("album", album)
+                .add("track", _track)
+                .build(true);
          String url = "http://ws.audioscrobbler.com/2.0/";
-         
-         Map<String, Object> params = new HashMap();
-         params.put("method", method);
-         params.put("sk", sk);
-         params.put("artist",artist);
-         params.put("album",album);
-         params.put("api_key", api_key);
-         params.put("track", _track);
-         params.put("api_sig", api_sig(map));
-         
-         
          WSRequest wsRequest = WS.withEncoding("utf-8").url(url);
-         wsRequest.parameters = params;
+         wsRequest.parameters = parameters;
          HttpResponse httpResponse = wsRequest.post();
          Logger.info(method + " :" + httpResponse.getString());
         
