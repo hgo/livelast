@@ -12,8 +12,16 @@ function next(){
         	});
 }
 $(document).ready(function(){
+	
 	$('#audioPlayer').bind('ended',function(){
 			next();
+	});
+	
+	$('#love').click(function(){
+		$.getJSON("/application/love",
+	    	    function(data){	
+	        			console.log(data);        			
+	        	});
 	});
 	next();
 });
@@ -25,4 +33,8 @@ $(document).ready(function(){
 <img src="" alt='image'>
 <input type="button" value="next" onclick="next()">
 
-<audio id="audioPlayer" autoplay autobuffer controls />
+<audio id="audioPlayer" autoplay autobuffer controls >
+<p>no browser support :(</p>
+</audio>
+
+<input type="button" value="love" id="love">
