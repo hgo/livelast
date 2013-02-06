@@ -7,8 +7,7 @@ function next(){
     	    function(data){	
         			$('#audioPlayer').attr('src',data.location);
         			$('#title').html(data.title + ' - ' + data.creator);
-        			$('#album').html(data.album);
-        			$('#image').attr('src',data.image);        			
+        			$('#album').html(data.album);        			
         	});
 }
 $(document).ready(function(){
@@ -28,13 +27,19 @@ $(document).ready(function(){
 </script>
 
 #{/set}
-<h3 id="title"><h3>
-<h4 id="album"><h4>
-<img src="" alt='image'>
-<input type="button" value="next" onclick="next()">
+<h3 id="title"></h3>
+<h4 id="album"></h4>
+<div>
+	<input type="button" value="love" id="love">
+	<audio id="audioPlayer" autoplay autobuffer controls>
+		<p>no browser support :(</p>
+	</audio>
+	<input type="button" value="next" onclick="next()">
+</div>
 
-<audio id="audioPlayer" autoplay autobuffer controls >
-<p>no browser support :(</p>
-</audio>
-
-<input type="button" value="love" id="love">
+<script>
+$('input').each(function(){
+	var h = $('audio').height();
+	$(this).css({'margin-top':'0px','margin-bottom':'0px'}).width(h + 15).height(h);
+});
+</script>
