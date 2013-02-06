@@ -216,6 +216,7 @@ public class Application extends Controller {
             put("album",album);
             put("title",_track);
             put("api_key",api_key);
+            put("track", _track);
          }};
          
          String url = "http://ws.audioscrobbler.com/2.0/";
