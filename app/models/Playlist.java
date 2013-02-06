@@ -17,6 +17,10 @@ public class Playlist implements Serializable{
             return tracks.get(idx);
         }
     }
+
+    public Track getCurrentTrack() {
+        return tracks.get(idx);
+    }
 }
 /*
  * <playlist version="1" xmlns="http://xspf.org/ns/0/">
