@@ -149,6 +149,7 @@ public class Application extends Controller {
         WSRequest wsRequest = WS.withEncoding("utf-8").url(url);
         wsRequest.parameters = params;
         HttpResponse httpResponse = wsRequest.post();
+        Logger.info("radio.getPlayList:" + httpResponse.getString());
         //
         Playlist playlist = new Playlist();
         
