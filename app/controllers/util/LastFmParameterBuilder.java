@@ -11,7 +11,7 @@ import play.libs.Codec;
 public class LastFmParameterBuilder {
     public final static String api_key = "ef1b8ec486144479aea70cc1bb73a7d5";
     public final static String api_secret = "96c36d6fb5bd26c2b7ed4a3e2b4b04bf";
-    TreeMap<String, String> map;
+    TreeMap<String, String> map = new TreeMap<String, String>();
     
     private LastFmParameterBuilder() {
     }
