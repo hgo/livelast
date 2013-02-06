@@ -111,7 +111,7 @@ public class Application extends Controller {
            put("method",method);
            put("sk",user.getKey());
            put("api_key",api_key);
-           put("rpt",rtp);
+//           put("rpt",rtp);
         }};
         
         Map<String, Object> params = new HashMap();
@@ -120,7 +120,7 @@ public class Application extends Controller {
         params.put("method", method);
         params.put("sk", user.getKey());
         params.put("api_key", api_key);
-        params.put("rtp", rtp);
+//        params.put("rtp", rtp);
         WSRequest wsRequest = WS.withEncoding("utf-8").url(url);
         wsRequest.parameters = params;
         HttpResponse httpResponse = wsRequest.post();
