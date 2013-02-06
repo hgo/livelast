@@ -3,6 +3,8 @@ package models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import play.Logger;
+
 public class Playlist implements Serializable{
     public String title;
     public String creator;
@@ -20,6 +22,16 @@ public class Playlist implements Serializable{
 
     public Track getCurrentTrack() {
         return tracks.get(idx);
+    }
+
+    public Track prevTrack() {
+        Track track = null;
+        try {
+            track = tracks.get(idx - 1);
+        } catch (Exception e) {
+            Logger.error("prevTrack error. idx : %i tracks.size() : %i", idx, tracks.size());
+        }
+        return track;
     }
 }
 /*

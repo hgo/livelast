@@ -9,6 +9,7 @@ public class Track implements Serializable{
     public String image;
     public long duration;
     public String creator;
+    public long playedAt;
 }
 
 
