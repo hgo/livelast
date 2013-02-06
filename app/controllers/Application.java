@@ -208,11 +208,13 @@ public class Application extends Controller {
         final String artist = track.creator;
         final String album = track.album;
         final String sk = user.getKey();
+        final String _track = track.title;
         TreeMap<String, String> map = new TreeMap<String, String>(){{
             put("method",method);
             put("sk",sk);
             put("artist",artist);
             put("album",album);
+            put("title",_track);
             put("api_key",api_key);
          }};
          
@@ -224,7 +226,9 @@ public class Application extends Controller {
          params.put("artist",artist);
          params.put("album",album);
          params.put("api_key", api_key);
+         params.put("track", _track);
          params.put("api_sig", api_sig(map));
+         
          
          WSRequest wsRequest = WS.withEncoding("utf-8").url(url);
          wsRequest.parameters = params;
