@@ -214,7 +214,6 @@ public class Application extends Controller {
             put("sk",sk);
             put("artist",artist);
             put("album",album);
-            put("title",_track);
             put("api_key",api_key);
             put("track", _track);
          }};
