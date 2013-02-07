@@ -1,4 +1,4 @@
 livelast
 ========
 
-livelast
+livelast - lastfm library radio for subscribers
