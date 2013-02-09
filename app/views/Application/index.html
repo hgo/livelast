@@ -8,12 +8,17 @@ function createSound(url){
 		  id:url,
 		  url: url,
 		  autoLoad: true,
-		  autoPlay: true,
+		  autoPlay: false,
 		  onload: function() {
 
 		  },
 		  volume: 50
-		});	
+		});
+	soundManager.play(url,{
+		onfinish: function(){
+			next();	
+		}
+	});
 }
 
 function next(){
