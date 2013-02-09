@@ -2,6 +2,7 @@
 #{set title:'Home' /}
 #{set 'moreScripts'}#{script src:'soundmanager2.js'/}
 <script>
+var track;
 function createSound(url){
 	soundManager.createSound({
 		  id:url,
@@ -17,8 +18,12 @@ function createSound(url){
 
 function next(){
 	$.getJSON("/application/nextTrack",
-    	    function(data){	
+    	    function(data){
+					if(track){
+						soundManager.stop(track);
+					}
         			createSound(data.location);
+        			track = data.location;
         			$('#title').html(data.title + ' - ' + data.creator);
         			$('#album').html(data.album);        			
         	});
