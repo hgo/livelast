@@ -1,15 +1,36 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
-#{set 'moreScripts'}
+#{set 'moreScripts'}#{script src:'soundmanager2.js'/}
 <script>
+function createSound(url){
+	soundManager.createSound({
+		  url: url,
+		  autoLoad: true,
+		  autoPlay: true,
+		  onload: function() {
+
+		  },
+		  volume: 50
+		});	
+}
+
 function next(){
 	$.getJSON("/application/nextTrack",
     	    function(data){	
-        			$('#audioPlayer').attr('src',data.location);
+        			createSound(data.location);
         			$('#title').html(data.title + ' - ' + data.creator);
         			$('#album').html(data.album);        			
         	});
 }
+
+soundManager.setup({
+	  url: '/public/test/',
+	  flashVersion: 9, // optional: shiny features (default = 8)
+	  useFlashBlock: false, 
+	  onready: function() {
+		  next();
+	  }
+	});
 $(document).ready(function(){
 	
 	$('#audioPlayer').bind('ended',function(){
@@ -22,7 +43,7 @@ $(document).ready(function(){
 	        			console.log(data);        			
 	        	});
 	});
-	next();
+	//next();
 });
 </script>
 
@@ -31,9 +52,9 @@ $(document).ready(function(){
 <h4 id="album"></h4>
 <div>
 	<input type="button" value="love" id="love">
-	<audio id="audioPlayer" autoplay autobuffer controls>
-		<p>no browser support :(</p>
-	</audio>
+<!-- 	<audio id="audioPlayer" autoplay autobuffer controls> -->
+<!-- 		<p>no browser support :(</p> -->
+<!-- 	</audio> -->
 	<input type="button" value="next" onclick="next()">
 </div>
 

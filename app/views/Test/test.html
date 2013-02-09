@@ -1,0 +1,50 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+#{set 'moreScripts'}
+#{script src:'soundmanager2.js'/}
+<script>
+soundManager.setup({
+  url: '/public/test/',
+  flashVersion: 9, // optional: shiny features (default = 8)
+  useFlashBlock: false, 
+  onready: function() {
+	  soundManager.createSound({
+		  id: 'mySound',
+		  url: 'rendering?name=${name}',
+		  autoLoad: true,
+		  autoPlay: true,
+		  onload: function() {
+		    alert('The sound '+this.id+' loaded!');
+		  },
+		  volume: 50
+		});
+  }
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+	
+	$('#audioPlayer').bind('ended',function(){
+		//	next();
+	});
+	
+	$('#love').click(function(){
+		$.getJSON("/application/love",
+	    	    function(data){	
+	        			console.log(data);        			
+	        	});
+	});
+	//next();
+});
+</script>
+#{/set}
+
+
+
+<div style="width: 400px;height: 400px;background-color: black;display: block;
+  margin-left: auto;
+  margin-right: auto;color: silver;">
+<h3>Liturgy- High Gold</h3>
+</div>
