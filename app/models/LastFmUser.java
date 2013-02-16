@@ -18,6 +18,8 @@ public class LastFmUser implements Serializable{
         if(this.playlist == null){
             this.playlist = playlist;
         }else{
+            this.playlist.title = playlist.title;
+            this.playlist.creator = playlist.creator;
             this.playlist.tracks.addAll(playlist.tracks);
         }
     }

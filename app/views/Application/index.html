@@ -60,7 +60,7 @@ $(document).ready(function(){
 
 #{/set}
 <!--  tagform -->
-<h5>you're listening to ${user.playlist?.title}</h5>
+<h5>you're listening to ${user.playlist?.title?.toLowerCase()} created by ${user.playlist?.creator?.toLowerCase()}</h5>
 <div>
 	<form action="/tag">
 		<input type="text" name="tag">
