@@ -33,6 +33,11 @@ public class Playlist implements Serializable{
         }
         return track;
     }
+
+    public void clear() {
+        this.tracks.clear();
+        this.idx = -1;
+    }
 }
 /*
  * <playlist version="1" xmlns="http://xspf.org/ns/0/">
