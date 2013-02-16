@@ -100,7 +100,7 @@ public class Application extends Controller {
         
         LastFmUser user = getUser();
         String url = "http://ws.audioscrobbler.com/2.0/";
-        String station = " lastfm://globaltags/"+tag;
+        String station = "lastfm://globaltags/"+tag;
         String method = "radio.tune";
         Map<String, Object> params = LastFmParameterBuilder.newInstance()
                               .add("station",station)
