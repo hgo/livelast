@@ -49,6 +49,9 @@ public class Application extends Controller {
         }
         request.args.put("user",Cache.get(session.getId()));
     }
+    public static void setVolume(int volume){
+        session.put("volume", volume > 100 ? 100 : (volume < 0  ? 0 : volume));
+    }
     public static void home(){
         render();
     }

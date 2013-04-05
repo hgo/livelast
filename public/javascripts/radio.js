@@ -13,9 +13,11 @@
 	    track = {},
 	    soundManager = mySoundManager;
 	
-	sliderEl.slider({min :0,max:100,value:100})
+	sliderEl.slider({min :0,max:100,value:sliderEl.val()})
 	  .on('slide', function(ev){
 	    soundManager.setVolume(track,ev.value);
+	  }).on('slideStop',function(ev){
+		  $.ajax('/application/setVolume?volume='+ev.value);
 	  });
 	
 	soundManager.setup({

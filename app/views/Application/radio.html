@@ -29,7 +29,7 @@
 				</div>
 				<span class="label detail" id="track">Track</span> <span>-</span>
 				<span class="label detail" id="singer">Singer</span>
-				<hr>Volume: &nbsp;<input type="text" class="span2" id="slider" value="100">
+				<hr>Volume: &nbsp;<input type="text" class="span2" id="slider" value="${session.volume ?: 100}" name="volume">
                 <hr>
 				<a class="btn mybtn btn-danger" id="love">Love</a> <a
 					class="btn mybtn btn-warning" id="next">Next Song</a> <a
