@@ -15,7 +15,7 @@
 	
 	sliderEl.slider({min :0,max:100,value:100})
 	  .on('slide', function(ev){
-	    soundManager(track,ev.value);
+	    soundManager.setVolume(track,ev.value);
 	  });
 	
 	soundManager.setup({
@@ -85,7 +85,7 @@
 				  positionEl.html(millisecondsToTime(this.position));
 				  progressEl.css({width:parseInt(this.position / this.duration *100 , 10) + "%"});
 			  },
-			  onplay:function() {
+			  onresume:function() {
 				  pauseEl.removeClass("btn-success").addClass("btn-inverse").html("Pause");
 			  },
 			  onpause:function() {
