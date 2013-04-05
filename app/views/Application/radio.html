@@ -1,45 +1,38 @@
-#{extends 'app.html' /}
-#{set 'moreStyles'}
+#{extends 'app.html' /} #{set 'moreStyles'}
 <style type="text/css">
 .detail {
-    display: inline;
-    font-size: 19px;
+	display: inline;
+	font-size: 19px;
 }
 </style>
-#{/set}
-#{set title:'Livelast' /} 
-#{script src:'soundmanager2.js'/}
-
+#{/set} #{set title:'Livelast' /} #{script src:'soundmanager2.js'/}
 <div class="container">
-	<div class="row main-features"></div>
-	<div class="container">
-		<div class="row">
-			<div class="span12">
-				<span class="label label-info">you're listening to ${user.playlist?.title?.toLowerCase()} created by ${user.playlist?.creator?.toLowerCase()}</span>
-			</div>
+	<div class="row">
+		<div class="span12">
+			<span class="label label-info">you're listening to ${user.playlist?.title?.toLowerCase()} created by ${user.playlist?.creator?.toLowerCase()}</span>
 		</div>
 	</div>
-	<hr>
-	<div class="row">
-		<div class="span6">
-			<div class="well">
-				<span class="label detail" id="track">Scenes In The City</span> <span>-</span>
-				<span class="label detail" id="singer">Branford Marsalis</span>
-				<hr>
-				<a class="btn mybtn btn-danger" id="love">Love</a> <a
-					class="btn mybtn btn-warning" id="next">Next Song</a> <a
-					class="btn mybtn btn-inverse" id="mute">Mute</a>
+</div>
+<hr>
+<div class="row">
+	<div class="span6">
+		<div class="well">
+			<span class="label detail" id="track">Track Name</span> <span>-</span>
+			<span class="label detail" id="singer">Singer - Creator Name</span>
+			<hr>
+			<a class="btn mybtn btn-danger" id="love">Love</a> <a
+				class="btn mybtn btn-warning" id="next">Next Song</a> <a
+				class="btn mybtn btn-inverse" id="mute">Mute</a>
+		</div>
+	</div>
+	<div class="span6">
+		<form class="form-search" action="/radio/">
+			<div class="input-append">
+				<input type="text" class="input-block-level input-medium"
+					placeholder="search tag radio" name="tag">
+				<button class="btn btn-success" type="submit">Go!</button>
 			</div>
-		</div>
-		<div class="span6">
-			<form class="form-search" action="/radio/" >
-				<div class="input-append">
-					<input type="text" class="input-block-level input-medium"
-						placeholder="search tag radio" name="tag">
-					<button class="btn btn-success" type="submit">Go!</button>
-				</div>
-			</form>
-		</div>
+		</form>
 	</div>
 </div>
 #{script src:'radio.js'/}
