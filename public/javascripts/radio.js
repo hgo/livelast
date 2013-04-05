@@ -13,7 +13,7 @@
 	    track = {},
 	    soundManager = mySoundManager;
 	
-	sliderEl.slider({min :0,max:100,value:sliderEl.val()})
+	sliderEl.slider({min :0,max:100,value:sliderEl.data('slider-value')})
 	  .on('slide', function(ev){
 	    soundManager.setVolume(track,ev.value);
 	  }).on('slideStop',function(ev){
@@ -93,7 +93,7 @@
 			  onpause:function() {
 				  pauseEl.removeClass("btn-inverse").addClass("btn-success").html("Play");
 			  },
-			  volume: sliderEl.slider('getValue').val()
+			  volume: sliderEl.val()
 			}
 		);
 		soundManager.play(url,{
