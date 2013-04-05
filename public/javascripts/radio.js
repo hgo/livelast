@@ -91,7 +91,7 @@
 			  onpause:function() {
 				  pauseEl.removeClass("btn-inverse").addClass("btn-success").html("Play");
 			  },
-			  volume: 100
+			  volume: sliderEl.slider('getValue').val()
 			}
 		);
 		soundManager.play(url,{
