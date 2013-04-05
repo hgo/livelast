@@ -93,6 +93,9 @@
 			  onpause:function() {
 				  pauseEl.removeClass("btn-inverse").addClass("btn-success").html("Play");
 			  },
+			  onload:function(success){
+				  progressEl.parent('.progress').removeClass('active progress-info progress-striped').addClass(success ? 'progress-success' : 'progress-danger');
+			  },
 			  volume: sliderEl.val()
 			}
 		);
