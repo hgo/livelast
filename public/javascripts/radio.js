@@ -36,11 +36,11 @@
 	muteEl.click(function() {
 		console.log("muteEl click");
 		if(soundManager.muted){
-			soundManager.unmute(track);
+			soundManager.unmuteAll();
 			muteEl.html("Mute");
 			console.log("unmuted");
 		}else{
-			soundManager.mute(track);
+			soundManager.muteAll();
 			muteEl.html("Unmute");	
 			console.log("muted");
 		}
