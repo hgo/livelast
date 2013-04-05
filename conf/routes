@@ -4,9 +4,8 @@
 
 # Home page
 GET     /                                       Application.home
-GET     /radio/{tag}                            Application.tag
+GET     /radio/listen                           Application.tag
 GET     /radio                                  Application.radio
-#GET     /tag                                    Application.tag
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

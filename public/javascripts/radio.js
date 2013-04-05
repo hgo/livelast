@@ -4,7 +4,7 @@
 	    nextEl = $('#next'),
 	    trackEl = $('#track'),
 	    singerEl = $('#singer'),
-	    muteEl = $('#mute'),
+	    pauseEl = $('#pause'),
 	    apEl   = $('#audioPlayer'),
 	    track = {},
 	    soundManager = mySoundManager;
@@ -33,16 +33,17 @@
 		console.log("apEl ended");
 		next();
 	});
-	muteEl.click(function() {
-		console.log("muteEl click");
-		if(soundManager.muted){
-			soundManager.unmuteAll();
-			muteEl.html("Mute");
-			console.log("unmuted");
+	pauseEl.click(function() {
+		console.log("pauseEl click");
+		if(track.paused){
+			track.play();
+			pauseEl.removeClass("btn-success").addClass("btn-inverse").html("Pause");
+			console.log("played");
 		}else{
-			soundManager.muteAll();
-			muteEl.html("Unmute");	
-			console.log("muted");
+			track.pause();
+			pauseEl.removeClass("btn-inverse").addClass("btn-success").pauseEl.html("Play");
+			pauseEl.removeClass()
+			console.log("paused");
 		}
 	});
 	
@@ -71,8 +72,12 @@
 			  onload: function() {
 
 			  },
+			  whileplaying: function() {
+				  console.log('sound '+this.id+' playing, '+this.position+' of '+this.duration);
+			  },
 			  volume: 100
-			});
+			}
+		);
 		soundManager.play(url,{
 			onfinish: function(){
 				next();	
