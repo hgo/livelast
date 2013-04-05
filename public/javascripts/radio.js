@@ -9,8 +9,14 @@
 	    durationEl   = $('#duration'),
 	    positionEl   = $('#position'),
 	    progressEl   = $('#progress'),
+	    sliderEl   = $('#slider'),
 	    track = {},
 	    soundManager = mySoundManager;
+	
+	sliderEl.slider({min :0,max:100,value:100})
+	  .on('slide', function(ev){
+	    soundManager(track,ev.value);
+	  });
 	
 	soundManager.setup({
 		  url: '/public/test/',
@@ -37,18 +43,9 @@
 		next();
 	});
 	pauseEl.click(function() {
-		console.log("pauseEl click");
-		if(track.paused){
-			track.play();
-			pauseEl.removeClass("btn-success").addClass("btn-inverse").html("Pause");
-			console.log("played");
-		}else{
-			track.pause();
-			pauseEl.removeClass("btn-inverse").addClass("btn-success").pauseEl.html("Play");
-			pauseEl.removeClass()
-			console.log("paused");
-		}
+		soundManager.togglePause(track);
 	});
+	
 	
 	function next(){
 		$.getJSON("/application/nextTrack",
@@ -87,7 +84,12 @@
 				  durationEl.html(millisecondsToTime(this.duration));
 				  positionEl.html(millisecondsToTime(this.position));
 				  progressEl.css({width:parseInt(this.position / this.duration *100 , 10) + "%"});
-//				  console.log('sound '+this.id+' playing, '+this.position+' of '+this.duration);
+			  },
+			  onplay:function() {
+				  pauseEl.removeClass("btn-success").addClass("btn-inverse").html("Pause");
+			  },
+			  onpause:function() {
+				  pauseEl.removeClass("btn-inverse").addClass("btn-success").html("Play");
 			  },
 			  volume: 100
 			}

@@ -1,5 +1,6 @@
 #{extends 'app.html' /}
 #{set 'moreStyles'}
+<link rel="stylesheet" href="@{'/public/stylesheets/slider.css'}">
 <style type="text/css">
 .detail {
     display: inline;
@@ -9,6 +10,7 @@
 #{/set}
 #{set title:'Livelast' /} 
 #{script src:'soundmanager2.js'/}
+#{script src:'bootstrap-slider.js'/}
 <div class="container">
 	<div class="container">
 		<div class="row">
@@ -27,7 +29,8 @@
 				</div>
 				<span class="label detail" id="track">Scenes In The City</span> <span>-</span>
 				<span class="label detail" id="singer">Branford Marsalis</span>
-				<hr>
+				<hr>Volume: &nbsp;<input type="text" class="span2" id="slider">
+                <hr>
 				<a class="btn mybtn btn-danger" id="love">Love</a> <a
 					class="btn mybtn btn-warning" id="next">Next Song</a> <a
 					class="btn mybtn btn-inverse" id="pause">Pause</a>
