@@ -6,6 +6,9 @@
 	    singerEl = $('#singer'),
 	    pauseEl = $('#pause'),
 	    apEl   = $('#audioPlayer'),
+	    durationEl   = $('#duration'),
+	    positionEl   = $('#position'),
+	    progressEl   = $('#progress'),
 	    track = {},
 	    soundManager = mySoundManager;
 	
@@ -62,6 +65,14 @@
 	        	});
 	}
 	
+	function millisecondsToTime(milli)
+	{
+	      var milliseconds = milli % 1000;
+	      var seconds = Math.floor((milli / 1000) % 60);
+	      var minutes = Math.floor((milli / (60 * 1000)) % 60);
+
+	      return minutes + ":" + seconds + "." + milliseconds;
+	}
 	
 	function createSound(url){
 		soundManager.createSound({
@@ -73,7 +84,10 @@
 
 			  },
 			  whileplaying: function() {
-				  console.log('sound '+this.id+' playing, '+this.position+' of '+this.duration);
+				  durationEl.html(millisecondsToTime(this.duration));
+				  positionEl.html(millisecondsToTime(this.position));
+				  progressEl.css({width:parseInt(this.position / this.duration *100 , 10) + "%"});
+//				  console.log('sound '+this.id+' playing, '+this.position+' of '+this.duration);
 			  },
 			  volume: 100
 			}
