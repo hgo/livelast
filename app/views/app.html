@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+        <link rel="stylesheet" href="@{'/public/stylesheets/bootstrap.css'}">
+        <link rel="stylesheet" href="@{'/public/stylesheets/bootstrap-responsive.css'}">
+        <script src="@{'/public/javascripts/jquery.min.js'}" type="text/javascript" charset="UTF-8"></script>
+        <script src="@{'/public/javascripts/bootstrap.min.js'}" type="text/javascript" charset="UTF-8"></script>
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        #{get 'moreScripts' /}
+        <style type="text/css">
+        .main-features {
+           margin-top: 60px;
+        }
+        </style>
+    </head>
+    
+	<body>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand" href="/">Livelast </a> <a></a>
+					<div class="navbar-content">
+						<ul class="nav ">
+							<li ${request.url.equals('/') ? "class='active'" : ""}><a href="/">Home</a></li>
+							<li ${request.url.equals('/radio') ? "class='active'" : ""}><a href="/radio">Radio</a></li>
+							<li><a href="#">About</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row main-features"></div>
+		#{doLayout /}
+	</body>
+</html>

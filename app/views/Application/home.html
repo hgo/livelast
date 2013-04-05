@@ -1,0 +1,43 @@
+#{extends 'app.html' /} 
+#{set title:'Livelast' /}
+<div class="container">
+	
+	<div class="hero-unit">
+		<h1>Listen last.fm from everywhere</h1>
+		<p>only last.fm subscribers accepted</p>
+		<p>
+			<a class="btn btn-inverse btn-large" href="/radio" id="listen"><span
+				class="btn-label">Listen !</span></a>
+		</p>
+		#{if flash.error}
+		<div class="alert alert-error">
+			<button type="button" class="close" data-dismiss="alert">X</button>
+			<b>Warning!</b> ${flash.error}.
+		</div>
+		#{/if}
+	</div>
+	<div class="row main-features">
+		<div class="span4">
+			<div class="well">
+				<h3>Rule #1</h3>
+				<p>
+					You do not talk about <b>livelast</b>
+				</p>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="well">
+				<h3>Rule #2</h3>
+				<p>
+					You <b>DO NOT</b> talk about <b>livelast</b>
+				</p>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="well">
+				<h3>Rule #3</h3>
+				<p>No more rules, listen from anywhere in the world</p>
+			</div>
+		</div>
+	</div>
+</div>
